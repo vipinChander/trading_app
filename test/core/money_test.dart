@@ -13,13 +13,13 @@ void main() {
     });
 
     test('multiplying by a quantity matches manual paise math', () {
-      final price = Money.fromPaise(24575); // 245.75
+      const price = Money.fromPaise(24575); // 245.75
       final orderValue = price * 37;
       expect(orderValue.paise, 24575 * 37);
     });
 
     test('formats as Indian rupees with two decimal digits', () {
-      final money = Money.fromPaise(123456);
+      const money = Money.fromPaise(123456);
       expect(money.format(), contains('1,234.56'));
     });
 

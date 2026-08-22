@@ -27,7 +27,7 @@ class OrderConfirmationScreen extends ConsumerWidget {
             children: [
               CircleAvatar(
                 radius: 32,
-                backgroundColor: color.withOpacity(0.15),
+                backgroundColor: color.withValues(alpha: 0.15),
                 child: Icon(Icons.check, color: color, size: 32),
               ),
               const SizedBox(height: 16),

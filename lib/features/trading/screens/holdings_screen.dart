@@ -14,6 +14,7 @@ import '../state/trading_providers.dart';
 import '../widgets/holding_row.dart';
 import '../widgets/portfolio_summary_card.dart';
 import 'buy_sell_ticket_screen.dart';
+import 'order_history_screen.dart';
 
 class HoldingsScreen extends ConsumerWidget {
   const HoldingsScreen({super.key});
@@ -27,6 +28,13 @@ class HoldingsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Holdings'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.receipt_long_outlined),
+            tooltip: 'Order history',
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const OrderHistoryScreen()),
+            ),
+          ),
           PopupMenuButton<HoldingsSortMode>(
             tooltip: 'Sort by',
             icon: const Icon(Icons.sort),

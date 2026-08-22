@@ -35,10 +35,19 @@ class Validators {
     return num.parse(raw.trim()).toInt();
   }
 
-  static String? watchlistName(String raw, {required List<String> existingNames}) {
+  static String? watchlistName(
+    String raw, {
+    required List<String> existingNames,
+    String? currentName,
+  }) {
     final trimmed = raw.trim();
     if (trimmed.isEmpty) return 'Enter a name';
     if (trimmed.length > 40) return 'Name is too long';
+    final lower = trimmed.toLowerCase();
+    final isDuplicate = existingNames
+        .where((n) => n.toLowerCase() != currentName?.toLowerCase())
+        .any((n) => n.toLowerCase() == lower);
+    if (isDuplicate) return 'A watchlist with this name already exists';
     return null;
   }
 }

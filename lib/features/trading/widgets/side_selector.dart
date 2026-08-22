@@ -12,16 +12,16 @@ class SideSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<OrderSide>(
-      segments: [
+      segments: const [
         ButtonSegment(
           value: OrderSide.buy,
-          label: const Text('Buy'),
-          icon: const Icon(Icons.arrow_upward),
+          label: Text('Buy'),
+          icon: Icon(Icons.arrow_upward),
         ),
         ButtonSegment(
           value: OrderSide.sell,
-          label: const Text('Sell'),
-          icon: const Icon(Icons.arrow_downward),
+          label: Text('Sell'),
+          icon: Icon(Icons.arrow_downward),
         ),
       ],
       selected: {value},

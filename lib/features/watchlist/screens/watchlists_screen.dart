@@ -10,10 +10,12 @@ class WatchlistsScreen extends ConsumerWidget {
   const WatchlistsScreen({super.key});
 
   Future<void> _createWatchlist(BuildContext context, WidgetRef ref) async {
+    final existing = ref.read(watchlistControllerProvider).map((w) => w.name).toList();
     final name = await WatchlistNameDialog.show(
       context,
       title: 'New watchlist',
       confirmLabel: 'Create',
+      existingNames: existing,
     );
     if (name == null || name.isEmpty) return;
     final watchlist = ref.read(watchlistControllerProvider.notifier).create(name);
@@ -25,11 +27,13 @@ class WatchlistsScreen extends ConsumerWidget {
   }
 
   Future<void> _renameWatchlist(BuildContext context, WidgetRef ref, String id, String current) async {
+    final existing = ref.read(watchlistControllerProvider).map((w) => w.name).toList();
     final name = await WatchlistNameDialog.show(
       context,
       title: 'Rename watchlist',
       confirmLabel: 'Save',
       initialValue: current,
+      existingNames: existing,
     );
     if (name == null || name.isEmpty) return;
     ref.read(watchlistControllerProvider.notifier).rename(id, name);

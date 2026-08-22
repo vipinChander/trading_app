@@ -22,11 +22,13 @@ class WatchlistDetailScreen extends ConsumerWidget {
   }
 
   Future<void> _rename(BuildContext context, WidgetRef ref, String current) async {
+    final existing = ref.read(watchlistControllerProvider).map((w) => w.name).toList();
     final name = await WatchlistNameDialog.show(
       context,
       title: 'Rename watchlist',
       confirmLabel: 'Save',
       initialValue: current,
+      existingNames: existing,
     );
     if (name != null && name.isNotEmpty) {
       ref.read(watchlistControllerProvider.notifier).rename(watchlistId, name);
@@ -80,7 +82,7 @@ class WatchlistDetailScreen extends ConsumerWidget {
           : ReorderableListView.builder(
               padding: const EdgeInsets.only(bottom: 80),
               itemCount: symbols.length,
-              onReorder: (oldIndex, newIndex) {
+              onReorderItem: (oldIndex, newIndex) {
                 ref.read(watchlistControllerProvider.notifier).reorderStock(watchlistId, oldIndex, newIndex);
               },
               itemBuilder: (context, index) {

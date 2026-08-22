@@ -75,8 +75,8 @@ class WatchlistController extends StateNotifier<List<Watchlist>> {
   }
 
   /// Moves the symbol at [oldIndex] to [newIndex], following the same
-  /// index convention Flutter's [ReorderableListView] uses (the caller
-  /// passes the raw `onReorder` indices straight through).
+  /// index convention Flutter's [ReorderableListView] uses with
+  /// [onReorderItem] (the new index is already adjusted for the removal).
   void reorderStock(String watchlistId, int oldIndex, int newIndex) {
     state = [
       for (final w in state)
@@ -87,10 +87,8 @@ class WatchlistController extends StateNotifier<List<Watchlist>> {
 
   List<String> _moved(List<String> symbols, int oldIndex, int newIndex) {
     final list = [...symbols];
-    var target = newIndex;
-    if (oldIndex < target) target -= 1;
     final symbol = list.removeAt(oldIndex);
-    list.insert(target, symbol);
+    list.insert(newIndex, symbol);
     return list;
   }
 }

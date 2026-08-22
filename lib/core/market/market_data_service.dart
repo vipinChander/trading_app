@@ -136,11 +136,11 @@ class MarketDataService {
     final current = _currentPrice[symbol]!;
     final previousClose = _previousClose[symbol]!;
 
-    // A small, roughly symmetric random walk: +/-0.5% of the current
+    // A small, roughly symmetric random walk: +/-0.1% of the current
     // price per tick, with a slight mean-reversion pull back toward the
     // day's opening price so a session doesn't drift off to an absurd
     // level over thousands of ticks.
-    final noise = (_random.nextDouble() - 0.5) * 0.01; // +/-0.5%
+    final noise = (_random.nextDouble() - 0.5) * 0.002; // +/-0.1%
     final distanceFromOpen = (current.paise - previousClose.paise) / previousClose.paise;
     final meanReversion = -distanceFromOpen * 0.02;
     final pctMove = noise + meanReversion;

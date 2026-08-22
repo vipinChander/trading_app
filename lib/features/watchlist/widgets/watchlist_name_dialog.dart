@@ -10,17 +10,23 @@ class WatchlistNameDialog extends StatefulWidget {
     required this.title,
     required this.confirmLabel,
     this.initialValue = '',
+    this.existingNames = const [],
   });
 
   final String title;
   final String confirmLabel;
   final String initialValue;
 
+  /// Names already in use. The dialog rejects a duplicate unless it matches
+  /// [initialValue] exactly (the "rename to the same name" no-op case).
+  final List<String> existingNames;
+
   static Future<String?> show(
     BuildContext context, {
     required String title,
     required String confirmLabel,
     String initialValue = '',
+    List<String> existingNames = const [],
   }) {
     return showDialog<String>(
       context: context,
@@ -28,6 +34,7 @@ class WatchlistNameDialog extends StatefulWidget {
         title: title,
         confirmLabel: confirmLabel,
         initialValue: initialValue,
+        existingNames: existingNames,
       ),
     );
   }
@@ -41,7 +48,11 @@ class _WatchlistNameDialogState extends State<WatchlistNameDialog> {
   String? _error;
 
   void _submit() {
-    final error = Validators.watchlistName(_controller.text, existingNames: const []);
+    final error = Validators.watchlistName(
+      _controller.text,
+      existingNames: widget.existingNames,
+      currentName: widget.initialValue.isNotEmpty ? widget.initialValue : null,
+    );
     if (error != null) {
       setState(() => _error = error);
       return;
