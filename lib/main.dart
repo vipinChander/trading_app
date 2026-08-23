@@ -40,7 +40,7 @@ class _StartupErrorApp extends StatelessWidget {
                 const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
                 const SizedBox(height: 16),
                 const Text(
-                  'Could not start the app',
+                  'Could not start the app please try again',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 8),
