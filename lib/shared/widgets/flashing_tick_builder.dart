@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/market/tick.dart';
+import 'package:trading_app/core/market/tick.dart';
 import '../../core/theme/app_theme.dart';
 
 /// Subscribes to a single symbol's live [Tick] stream and briefly flashes
