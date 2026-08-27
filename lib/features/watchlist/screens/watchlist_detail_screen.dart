@@ -82,7 +82,7 @@ class WatchlistDetailScreen extends ConsumerWidget {
           : ReorderableListView.builder(
               padding: const EdgeInsets.only(bottom: 80),
               itemCount: symbols.length,
-              onReorderItem: (oldIndex, newIndex) {
+              onReorder: (oldIndex, newIndex) {
                 ref.read(watchlistControllerProvider.notifier).reorderStock(watchlistId, oldIndex, newIndex);
               },
               itemBuilder: (context, index) {
